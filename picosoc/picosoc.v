@@ -17,6 +17,11 @@
  *
  */
 
+//Modif for BoxLambda:
+`ifdef __ICARUS__
+`timescale 1 ns/1 ps
+`endif
+
 `ifndef PICORV32_REGS
 `ifdef PICORV32_V
 `error "picosoc.v must be read before picorv32.v!"
@@ -28,6 +33,8 @@
 `ifndef PICOSOC_MEM
 `define PICOSOC_MEM picosoc_mem
 `endif
+
+`include "picosoc_mem.v"
 
 // this macro can be used to check if the verilog files in your
 // design are read in the correct order.
@@ -240,23 +247,4 @@ module picosoc_regs (
 	assign rdata2 = regs[raddr2[4:0]];
 endmodule
 
-module picosoc_mem #(
-	parameter integer WORDS = 256
-) (
-	input clk,
-	input [3:0] wen,
-	input [21:0] addr,
-	input [31:0] wdata,
-	output reg [31:0] rdata
-);
-	reg [31:0] mem [0:WORDS-1];
-
-	always @(posedge clk) begin
-		rdata <= mem[addr];
-		if (wen[0]) mem[addr][ 7: 0] <= wdata[ 7: 0];
-		if (wen[1]) mem[addr][15: 8] <= wdata[15: 8];
-		if (wen[2]) mem[addr][23:16] <= wdata[23:16];
-		if (wen[3]) mem[addr][31:24] <= wdata[31:24];
-	end
-endmodule
 

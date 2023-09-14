@@ -22,7 +22,11 @@
 /* verilator lint_off CASEOVERLAP */
 /* verilator lint_off CASEINCOMPLETE */
 
-`timescale 1 ns / 1 ps
+//Modif for BoxLambda:
+`ifdef __ICARUS__
+`timescale 1 ns/1 ps
+`endif
+
 // `default_nettype none
 // `define DEBUGNETS
 // `define DEBUGREGS
