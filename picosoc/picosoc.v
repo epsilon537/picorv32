@@ -17,11 +17,6 @@
  *
  */
 
-//Modif for BoxLambda:
-`ifdef __ICARUS__
-`timescale 1 ns/1 ps
-`endif
-
 `ifndef PICORV32_REGS
 `ifdef PICORV32_V
 `error "picosoc.v must be read before picorv32.v!"

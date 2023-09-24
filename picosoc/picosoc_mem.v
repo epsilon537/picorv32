@@ -1,3 +1,11 @@
+//Modif for BoxLambda:
+`ifdef __ICARUS__
+`timescale 1 ns/1 ps
+`endif
+
+/*This module used to be part of picosoc.v. It's split off as a separate file for easier integration
+ *into the BoxLambda project. picosoc.v 'includes this file.*/
+
 module picosoc_mem #(
 	parameter integer WORDS = 256
 ) (
